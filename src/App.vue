@@ -1,8 +1,11 @@
-<template>
+<template> 
   <div>
-    <h1>E-Commerce Store</h1>
-    <ProductList />
-    <ShoppingCart />
+    <!-- Navigation Buttons -->
+    <button @click="currentPage = 'ProductList'">Products</button>
+    <button @click="currentPage = 'ShoppingCart'">Cart</button>
+
+    <!-- Main Content -->
+    <component :is="currentPage"></component>
   </div>
 </template>
 
@@ -14,6 +17,20 @@ export default {
   components: {
     ProductList,
     ShoppingCart
+  },
+  data() {
+    return {
+      currentPage: 'ProductList' // Default page
+    };
   }
 };
 </script>
+
+<style scoped>
+/* Align products horizontally */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+</style>

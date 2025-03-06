@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'; 
+import { createStore } from 'vuex';
 
 export default createStore({
   state() {
@@ -34,27 +34,22 @@ export default createStore({
         }
       }
     },
-    setProducts(state, products) {
-      state.products = products;
+    clearCart(state) {
+      state.cart = {};
     }
   },
   actions: {
-    async fetchProducts({ commit }) {
-      try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const data = await response.json();
-        commit('setProducts', data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
+    async addToCart({ commit }, productId) {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      commit('addToCart', productId);
     },
-    async addToCartAsync({ commit }, productId) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          commit('addToCart', productId);
-          resolve();
-        }, 500);
-      });
+    async removeFromCart({ commit }, productId) {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      commit('removeFromCart', productId);
+    },
+    async clearCart({ commit }) {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      commit('clearCart');
     }
   },
   getters: {
